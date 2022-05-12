@@ -1,6 +1,8 @@
 class UI {
     constructor() {        
         this.userTableDiv = document.getElementById("user-table");
+        this.registrationFDivUI = document.getElementById("registration");
+        this.formUI = document.querySelector("form");
     }
 
     showUser() {
@@ -49,5 +51,14 @@ class UI {
                 </div>
             </div>
         `
+    }
+    showSuccessMsg(msg) {
+        const successDiv = document.createElement("div");
+        successDiv.className = "alert alert-success";
+        successDiv.appendChild(document.createTextNode(msg));
+        this.registrationFDivUI.insertBefore(successDiv, this.formUI);
+        setTimeout(() => {
+            successDiv.remove();
+        },2500);
     }
 }

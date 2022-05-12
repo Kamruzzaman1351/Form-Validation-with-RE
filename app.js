@@ -77,6 +77,7 @@ function formSubmit(e) {
         Storage.storeUser(user);
         clearInput();
         ui.showUser();
+        ui.showSuccessMsg("User Created")
    } catch(err) {
         console.log(err.message);
    }

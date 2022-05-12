@@ -1,3 +1,5 @@
+// Init UI Class
+const ui = new UI;
 // UI variables
 const nameUI = document.getElementById("name");
 const zipCodeUI = document.getElementById("zip");
@@ -10,7 +12,8 @@ nameUI.addEventListener("blur", validateName);
 zipCodeUI.addEventListener("blur", validateZip);
 emailUI.addEventListener("blur", validateEmail);
 phoneUI.addEventListener("blur", validatePhone);
-
+submitUI.addEventListener("click", formSubmit);
+document.addEventListener("DOMContentLoaded", ui.showUser())
 // Validate Name
 function validateName() {
     const name = nameUI.value;
@@ -52,4 +55,38 @@ function validatePhone() {
     } else {
         phoneUI.classList.remove("is-invalid");
     }
+}
+
+// Form Submit 
+function formSubmit(e) {
+    e.preventDefault();
+   if(nameUI.value === "") {
+       validateName()
+   }
+   if(zipCodeUI.value === "") {
+       validateZip()
+   }
+   if(emailUI.value === "") {
+       validateEmail()
+   }
+   if(phoneUI.value === "") {
+       validatePhone()
+   }
+   const user = new User(nameUI.value, zipCodeUI.value, emailUI.value, phoneUI.value);
+   try {        
+        Storage.storeUser(user);
+        clearInput();
+        ui.showUser();
+   } catch(err) {
+        console.log(err.message);
+   }
+//    console.log(user);
+}
+
+// Clear Input Field
+function clearInput() {
+    nameUI.value = '';
+    zipCodeUI.value = "";
+    emailUI.value = "";
+    phoneUI.value = "";
 }

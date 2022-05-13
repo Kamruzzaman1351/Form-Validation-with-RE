@@ -60,27 +60,25 @@ function validatePhone() {
 // Form Submit 
 function formSubmit(e) {
     e.preventDefault();
-   if(nameUI.value === "") {
-       validateName()
+   (nameUI.value === "") && validateName();
+   (zipCodeUI.value === "") && validateZip();
+   (emailUI.value === "") && validateEmail();
+   (phoneUI.value === "") && validatePhone();
+   if(nameUI.value === "" || zipCodeUI.value === "" || emailUI.value === "" || phoneUI.value === "") {
+       ui.showMsg("Please Fill all the input field", "alert alert-danger");
+   } else {
+        const user = new User(nameUI.value, zipCodeUI.value, emailUI.value, phoneUI.value);
+        ui.showMsg("User Created", "alert alert-success");
+        try {        
+            Storage.storeUser(user);
+            clearInput();
+            ui.showUser();
+            
+        } catch(err) {
+            console.log(err.message);
+        }
    }
-   if(zipCodeUI.value === "") {
-       validateZip()
-   }
-   if(emailUI.value === "") {
-       validateEmail()
-   }
-   if(phoneUI.value === "") {
-       validatePhone()
-   }
-   const user = new User(nameUI.value, zipCodeUI.value, emailUI.value, phoneUI.value);
-   try {        
-        Storage.storeUser(user);
-        clearInput();
-        ui.showUser();
-        ui.showSuccessMsg("User Created")
-   } catch(err) {
-        console.log(err.message);
-   }
+   
 //    console.log(user);
 }
 

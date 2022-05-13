@@ -52,9 +52,9 @@ class UI {
             </div>
         `
     }
-    showSuccessMsg(msg) {
+    showMsg(msg, className) {
         const successDiv = document.createElement("div");
-        successDiv.className = "alert alert-success";
+        successDiv.className = className;
         successDiv.appendChild(document.createTextNode(msg));
         this.registrationFDivUI.insertBefore(successDiv, this.formUI);
         setTimeout(() => {
